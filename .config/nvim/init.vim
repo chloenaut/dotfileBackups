@@ -1,20 +1,20 @@
 " General Config
-set nocompatible				" Disable compatibility to old-time vi
-set showmatch					" Show matching brackets.
-set ignorecase					" Case insensitive matching
-set mouse=v						" Middle-click paste with mouse
-set hlsearch					" Highlight search results
-set tabstop=4					" Number of columns occupied by a tab character
-set softtabstop=4				" See multiple spaces as tabstops so <BS> does the right thing
-set shiftwidth=4				" Width for autoindents
-set autoindent					" Indent a new line the same amount as the line just typed
-set number						" Add line numbers
-set relativenumber				" Make line numbers relative
-set wildmode=longest,list		" Get bash-like tab completions
-set hidden						" Hide buffer don't delete
+set nocompatible			          " Disable compatibility to old-time vi
+set showmatch					          " Show matching brackets.
+set ignorecase				          " Case insensitive matching
+set mouse=v						          " Middle-click paste with mouse
+set hlsearch					          " Highlight search results
+set tabstop=4					          " Number of columns occupied by a tab character
+set softtabstop=4			          " See multiple spaces as tabstops so <BS> does the right thing
+set shiftwidth=4				        " Width for autoindents
+set autoindent					        " Indent a new line the same amount as the line just typed
+set number						          " Add line numbers
+set relativenumber			        " Make line numbers relative
+set wildmode=longest,list	      " Get bash-like tab completions
+set hidden						          " Hide buffer don't delete
 set backspace=indent,eol,start	" Delete anything in insert
-filetype plugin indent on		" Allows auto-indenting depending on file type
-syntax on						" Syntax highlighting
+filetype plugin indent on		    " Allows auto-indenting depending on file type
+syntax on						            " Syntax highlighting
 
 "Arrows wack
 noremap <Up> <NOP>
