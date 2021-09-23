@@ -8,7 +8,9 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-plugins=(dotbare git zsh-vi-mode)
+(cat ~/.cache/wal/sequences &)
+
+plugins=(dotbare git)
 export ZSH="/home/chlo/.oh-my-zsh"
 bindkey -v
 # Basic Auto Complete
@@ -132,15 +134,18 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+color0=$(xrdb -query -all | grep -E "\*\.color0:\s+#\d*" | cut -n -f2)
+color1=$(xrdb -query -all | grep -E "\*\.color1:\s+#\d*" | cut -n -f2)
+color15=$(xrdb -query -all | grep -E "\*\.color15:\s+#\d*" | cut -n -f2)
+
+alias dmenu="dmenu -nb \"$color0\" -nf \"$color15\" -sb \"$color1\" -sf \"#ffffff\""
+alias matlab="/usr/local/MATLAB/R2021a/bin/matlab"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /home/chlo/Documents/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export DOT_REPO="https://github.com/chloenaut/KDEDotfiles-Backups.git" DOT_DEST="github"
-
-# Created by `userpath` on 2021-03-02 20:18:02
-export PATH="$PATH:/home/chlo/.local/bin"
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+export PATH=/home/chlo/.emacs.d/bin:$PATH
