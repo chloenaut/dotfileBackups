@@ -1,20 +1,20 @@
 " General Config
-set nocompatible            " Disable compatibility to old-time vi
-set showmatch               " Show matching brackets.
-set ignorecase              " Case insensitive matching
-set mouse=v                 " Middle-click paste with mouse
-set hlsearch                " Highlight search results
-set tabstop=4               " Number of columns occupied by a tab character
-set softtabstop=4           " See multiple spaces as tabstops so <BS> does the right thing
-set shiftwidth=4            " Width for autoindents
-set autoindent              " Indent a new line the same amount as the line just typed
-set number                  " Add line numbers
-set relativenumber			" Make line numbers relative
-set wildmode=longest,list   " Get bash-like tab completions
-set hidden					" Hide buffer don't delete
-set backspace=indent,eol,start " Delete anything in insert
-filetype plugin indent on   " Allows auto-indenting depending on file type
-syntax on					" Syntax highlighting
+set nocompatible				" Disable compatibility to old-time vi
+set showmatch					" Show matching brackets.
+set ignorecase					" Case insensitive matching
+set mouse=v						" Middle-click paste with mouse
+set hlsearch					" Highlight search results
+set tabstop=4					" Number of columns occupied by a tab character
+set softtabstop=4				" See multiple spaces as tabstops so <BS> does the right thing
+set shiftwidth=4				" Width for autoindents
+set autoindent					" Indent a new line the same amount as the line just typed
+set number						" Add line numbers
+set relativenumber				" Make line numbers relative
+set wildmode=longest,list		" Get bash-like tab completions
+set hidden						" Hide buffer don't delete
+set backspace=indent,eol,start	" Delete anything in insert
+filetype plugin indent on		" Allows auto-indenting depending on file type
+syntax on						" Syntax highlighting
 
 "Arrows wack
 noremap <Up> <NOP>
@@ -42,8 +42,8 @@ nnoremap <Space>b9 :buffer 9<CR>
 nnoremap <Space>bn :bnext<CR>
 nnoremap <Space>bp :bprev<CR>
 nnoremap <Space>be :edit<CR>:edit<Space>
-" nnoremap <Space>bd :bd<CR>:bd<Space>
 nnoremap <Space>bd :bp<bar>vsp<bar>bn<bar>bd<CR>
+" nnoremap <Space>bd :bd<CR>:bd<Space>
 
 " Window commands
 nnoremap <Space>ww :W<CR>
@@ -61,8 +61,6 @@ nnoremap <Space>th :bel split term://zsh<CR>
 nnoremap <Space>tv :vsplit term://zsh<CR>
 tnoremap <Esc> <C-\><C-n>
 
-
-
 " Plugins and theme
 source $HOME/.config/nvim/vim-plug/plugins.vim
 autocmd vimenter * ++nested colorscheme gruvbox
@@ -75,11 +73,11 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 
 " ALE Binds
-" move to the next ALE warning / error
+nnoremap K :ALEHover<CR>
 nnoremap <Space>] :ALENextWrap<CR>        
-" move to the previous ALE warning error
 nnoremap <Space>[ :ALEPreviousWrap<CR> 
+nnoremap <silent> <Space>r :ALEFindReferences<CR>
+" error markers
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
-nnoremap <silent> <Space>r :ALEFindReferences<CR>
-nnoremap K :ALEHover<CR>
+
