@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 (cat ~/.cache/wal/sequences &)
 
@@ -121,31 +121,60 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+#
+#Colors
+color0=$(xrdb -query -all | grep -E "\*\.color0:\s+#\d*" | cut -n -f2)
+color1=$(xrdb -query -all | grep -E "\*\.color1:\s+#\d*" | cut -n -f2)
+color15=$(xrdb -query -all | grep -E "\*\.color15:\s+#\d*" | cut -n -f2)
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-color0=$(xrdb -query -all | grep -E "\*\.color0:\s+#\d*" | cut -n -f2)
-color1=$(xrdb -query -all | grep -E "\*\.color1:\s+#\d*" | cut -n -f2)
-color15=$(xrdb -query -all | grep -E "\*\.color15:\s+#\d*" | cut -n -f2)
-
-alias dmenu="dmenu -nb \"$color0\" -nf \"$color15\" -sb \"$color1\" -sf \"#ffffff\""
-alias matlab="/usr/local/MATLAB/R2021a/bin/matlab"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias dmenu="dmenu -nb \"$color0\" -nf \"$color15\" -sb \"$color1\" -sf \"#ffffff\""
+alias matlab="/usr/local/MATLAB/R2021a/bin/matlab"
+alias ssh="kitty +kitten ssh"
+alias icat="kitty +kitten icat"
+
 source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-export PATH=/home/chlo/.emacs.d/bin:$PATH
+
+# # ax - archive extractor
+# # usage: ax <file>
+ax ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ax()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+

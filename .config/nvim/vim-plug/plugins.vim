@@ -20,11 +20,21 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'morhetz/gruvbox'
     "node js
     Plug 'moll/vim-node'
+    "Tex
+    Plug 'lervag/vimtex'
+    
     " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     " let g:deoplete#enable_at_startup = 1
     " autocomplete
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = ['coc-clangd', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-rust-analyzer']  
+    let g:coc_global_extensions = ['coc-clangd', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-rust-analyzer', 'coc-vimtex']  
+    
+    " Snippets
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
     "ALE linting
     Plug 'dense-analysis/ale'
