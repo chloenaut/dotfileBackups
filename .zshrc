@@ -20,8 +20,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
-
-
 # Path to your oh-my-zsh installation.
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
@@ -122,9 +120,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
   export EDITOR='vim'
+else
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -147,6 +145,8 @@ alias dmenu="dmenu -nb \"$color0\" -nf \"$color15\" -sb \"$color1\" -sf \"#fffff
 alias matlab="/usr/local/MATLAB/R2021a/bin/matlab"
 alias ssh="kitty +kitten ssh"
 alias icat="kitty +kitten icat"
+alias rains="~/.config/rainbowstream/rainbow.sh"
+alias xv="sxiv"
 
 source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

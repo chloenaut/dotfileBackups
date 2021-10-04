@@ -43,7 +43,9 @@ nnoremap <Space>b6 :buffer 6<CR>
 nnoremap <Space>b7 :buffer 7<CR>
 nnoremap <Space>b8 :buffer 8<CR>
 nnoremap <Space>b9 :buffer 9<CR>
+nnoremap <Space>l :bnext<CR>
 nnoremap <Space>bn :bnext<CR>
+nnoremap <Space>h :bprev<CR>
 nnoremap <Space>bp :bprev<CR>
 nnoremap <Space>be :edit<CR>:edit<Space>
 nnoremap <Space>bd :bp<bar>vsp<bar>bn<bar>bd<CR>

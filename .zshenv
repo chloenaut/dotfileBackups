@@ -1,0 +1,10 @@
+source "$HOME/.cargo/env"
+export PATH=/home/chlo/.emacs.d/bin:$PATH
+export EDITOR="/usr/bin/nvim"
+export NVIMRC="$HOME/.config/nvim/init.vim"
+export NVIMPLUGRC="$HOME/.config/nvim/vim-plug/plugins.vim"
+export RAINBOW_CONFIG="$HOME/.config/rainbowstream/.rainbowconfig.json"
+export WORKON_HOME="$HOME/.pyEnvs"
+export PATH=$PATH:$WORKON_HOME
+export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python"
+source "$HOME/.local/bin/virtualenvwrapper.sh"
