@@ -8,6 +8,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-scripts/vim-smartclose' 
     " Airline
     Plug 'vim-airline/vim-airline'
+    "Telescope
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
     " File Explorer
     Plug 'scrooloose/NERDTree' |
                 \ Plug 'Xuyuanp/nerdtree-git-plugin' |
@@ -22,7 +25,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'moll/vim-node'
     "Tex
     Plug 'lervag/vimtex'
-    
+    "blankline
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'Pocco81/AutoSave.nvim'
     " Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
     " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     " let g:deoplete#enable_at_startup = 1

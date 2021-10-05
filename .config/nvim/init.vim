@@ -72,11 +72,16 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 autocmd vimenter * ++nested colorscheme gruvbox
 
 " NerdTree Config
-nnoremap <Space>fn :NERDTreeFocus<CR>
 nnoremap <Space>ft :NERDTreeToggle<CR>
-nnoremap <Space>ff :NERDTreeFind
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
+
+"Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <Space>ff <cmd>Telescope find_files<cr>
+nnoremap <Space>fg <cmd>Telescope live_grep<cr>
+nnoremap <Space>fb <cmd>Telescope buffers<cr>
+nnoremap <Space>fh <cmd>Telescope help_tags<cr>
 
 " Vimtex config
 let g:vimtex_view_method = 'zathura'
@@ -163,3 +168,25 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
+" AutoSave
+lua << EOF
+local autosave = require("autosave")
+
+autosave.setup(
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave", "TextChanged"},
+        conditions = {
+            exists = true,
+            filename_is_not = {},
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 0,
+        debounce_delay = 150
+    }
+)
+EOF

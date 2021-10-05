@@ -2,6 +2,7 @@
 #### EDIT THE FILES HERE: /home/chlo/.i3/config.d/**/*
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod1
+set $mod2 Mod4
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
@@ -29,6 +30,7 @@ focus_follows_mouse no
 # i3 shorcuts for reload/restart/exit
 bindsym $mod+Shift+C exec ~/.i3/create_config reload
 bindsym $mod+Shift+R exec ~/.i3/create_config restart
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -116,13 +118,71 @@ set_from_resource $term_color15    color15
   client.background       #2B2C2B
 
 
+###############################
+#   App and Autostart Config  #
+###############################
+
+################################################################################################
+# sound-section # 
+#################################################################################################
+
+#exec --no-startup-id volumeicon
+exec --no-startup-id start-pulseaudio-x11
+exec --no-startup-id pa-applet
+bindsym $mod+Ctrl+m exec pavucontrol
+exec --no-startup-id systemctl --user start spotifyd.service
+exec --no-startup-id playerctld daemon
+
+################################################################################################
+# Screen brightness controls
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
+# Start Applications
+bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+F2 exec firefox
+bindsym $mod+Shift+F2 exec qutebrowser
+bindsym $mod+F3 exec pcmanfm
+# bindsym $mod+F3 exec ranger
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F4 layout tabbed, exec terminal -e thunderbird 
+bindsym $mod+F5 exec kitty -e 'spt' 
+bindsym $mod+F6 exec kitty -e 'mocp'
+bindsym $mod+F7 exec --no-startup-id "${HOME:-}/Documents/CodingProjects/YTSearch/yt-search-drun.sh"
+bindsym $mod+t exec --no-startup-id pkill picom
+bindsym $mod+Ctrl+t exec --no-startup-id picom -b
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod2+Print --release exec --no-startup-id "flameshot launcher"
+bindsym $mod2+Shift+Print --release exec --no-startup-id "flameshot full -p ~/Pictures/Screencaps"
+bindsym $mod2+Ctrl+Print --release exec --no-startup-id flameshot full -c
+bindsym $mod+F1 exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+
+# Lock screen
+bindsym $mod+9 exec --no-startup-id blurlock
+
+# Autostart applications
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id terminal -e /usr/bin/thunderbird, layout tabbed
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id pamac-tray
+# exec --no-startup-id clipit
+# exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+exec --no-startup-id flameshot &
+# exec --no-startup-id blueman-applet
+# exec_always --no-startup-id sbxkb
+
 #############################
 ### settings for i3-gaps: ###
 #############################
 
 # Set inner/outer gaps
-gaps inner 0
-gaps outer -2
+gaps inner 10
+gaps outer 5
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -172,66 +232,6 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-# Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
-
-# Start Applications
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec firefox
-bindsym $mod+Shift+F2 exec qutebrowser
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F4 layout tabbed, exec terminal -e thunderbird 
-bindsym $mod+F5 exec kitty -e 'spt' 
-bindsym $mod+F6 exec kitty -e 'mocp'
-bindsym $mod+F7 exec --no-startup-id "${HOME:-}/Documents/CodingProjects/YTSearch/yt-search-drun.sh"
-bindsym $mod+t exec --no-startup-id pkill picom
-bindsym $mod+Ctrl+t exec --no-startup-id picom -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id flameshot gui
-bindsym $mod+Print --release exec --no-startup-id flameshot launcher 
-bindsym $mod+Shift+Print --release exec --no-startup-id flameshot full -p "$HOME/Pictures/Screencaps" # --no-startup-id i3-scrot -s
-bindsym $mod+Shift+c+Print --release exec --no-startup-id flameshot full -c
-bindsym $mod+F1 exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-
-# Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock
-
-# Autostart applications
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec terminal -e thunderbird, layout tabbed
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
-exec --no-startup-id flameshot
-
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-#exec --no-startup-id volumeicon
-# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-# exec --no-startuo-id amixer set Master mute;
-exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id pa-applet
-bindsym $mod+Ctrl+m exec pavucontrol
-exec playerctld daemon
-
-################################################################################################
-
-
 
 # vim:filetype=i3
 
@@ -356,8 +356,8 @@ for_window [class="feh"] floating enable
 for_window [urgent=latest] focus
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
-default_floating_border normal
+default_border pixel 0
+default_floating_border none 
 
 # Hide borders
 hide_edge_borders none
